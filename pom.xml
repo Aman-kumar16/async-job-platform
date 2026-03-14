@@ -13,4 +13,10 @@
     <name>async-job-platform</name>
     <description>Parent project for the distributed Async Job Processing platform using Kafka, Redis, and PostgresSQL</description>
 
+    <modules>
+        <module>common</module>
+        <module>job-query-service</module>
+        <module>job-submission-service</module>
+        <module>job-worker-service</module>
+    </modules>
 </project>
