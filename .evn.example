@@ -1,0 +1,16 @@
+# Database Configuration
+# These are used by both Docker Compose and Spring Boot
+POSTGRES_USER=user
+POSTGRES_PASSWORD=password
+POSTGRES_DB=asyncjobdatabase
+DB_PORT=5432
+
+# Redis Configuration
+REDIS_HOST=localhost
+REDIS_PORT=6379
+
+# Infrastructure Ports
+ZOOKEEPER_PORT=2181
+KAFKA_EXTERNAL_PORT=9092
+KAFKA_INTERNAL_PORT=29092
+KAFKA_UI_PORT=8090
