@@ -1,6 +1,9 @@
 # Compiled class file
 *.class
 
+#common generated files
+common/target/
+
 # Log file
 *.log
 
