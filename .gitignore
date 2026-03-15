@@ -4,6 +4,9 @@
 #common generated files
 common/target/
 
+#ignore secrets for docker
+.env
+
 # Log file
 *.log
 
