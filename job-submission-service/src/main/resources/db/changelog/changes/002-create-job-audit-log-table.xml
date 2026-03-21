@@ -20,7 +20,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="message" type="TEXT"/>
-            <column name="changed_at" type="TIMESTAMP">
+            <column name="recorded_at" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
         </createTable>
