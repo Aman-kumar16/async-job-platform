@@ -28,15 +28,15 @@ public class Job {
     private String id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="job_type", nullable = false)
+    @Column(name = "job_type", nullable = false)
     private JobType jobType;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "job_priority", nullable = false)
     private JobPriority jobPriority;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "job_status", nullable = false)
     private JobStatus jobStatus;
 
     @JdbcTypeCode(SqlTypes.JSON)

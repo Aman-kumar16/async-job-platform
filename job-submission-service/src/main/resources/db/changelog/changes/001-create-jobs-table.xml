@@ -13,10 +13,10 @@
             <column name="job_type" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="priority" type="VARCHAR(10)">
+            <column name="job_priority" type="VARCHAR(10)">
                 <constraints nullable="false"/>
             </column>
-            <column name="status" type="VARCHAR(20)">
+            <column name="job_status" type="VARCHAR(20)">
                 <constraints nullable="false"/>
             </column>
             <column name="payload" type="JSONB"/>
@@ -30,6 +30,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="error_message" type="TEXT"/>
+            <column name="version" type="BIGINT" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
             <column name="submitted_at" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
@@ -38,7 +41,7 @@
         </createTable>
 
         <createIndex tableName="jobs" indexName="idx_jobs_status">
-            <column name="status"/>
+            <column name="job_status"/>
         </createIndex>
         <createIndex tableName="jobs" indexName="idx_jobs_job_type">
             <column name="job_type"/>
