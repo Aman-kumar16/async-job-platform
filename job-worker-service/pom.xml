@@ -43,6 +43,16 @@
 			<groupId>com.aman.asyncjob</groupId>
 			<artifactId>common</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-models-jakarta</artifactId>
+			<version>2.2.43</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
