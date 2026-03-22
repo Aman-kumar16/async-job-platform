@@ -57,7 +57,7 @@ public class JobService {
                 .maxRetries(DEFAULT_MAX_RETRIES)
                 .build();
 
-        jobRepository.save(job);
+        Job savedJob = jobRepository.save(job);
         log.info("Job persisted: id={} type={} priority={}", jobId, job.getJobType(), job.getJobPriority());
 
         // Step 3: Write audit log
@@ -86,10 +86,11 @@ public class JobService {
 
         // Step 6: Return
         return JobSubmitResponse.builder()
-                .jobId(jobId)
-                .jobStatus(JobStatus.PENDING)
-                .jobType(request.getJobType())
-                .jobPriority(request.getPriority())
+                .jobId(savedJob.getId())
+                .jobStatus(savedJob.getJobStatus())
+                .jobType(savedJob.getJobType())
+                .jobPriority(savedJob.getJobPriority())
+                .submittedAt(savedJob.getSubmittedAt())
                 .duplicate(false)
                 .build();
     }
