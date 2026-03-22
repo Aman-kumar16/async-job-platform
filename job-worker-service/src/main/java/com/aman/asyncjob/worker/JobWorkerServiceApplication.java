@@ -1,4 +1,4 @@
-package com.aman.asyncjob.job_worker_service;
+package com.aman.asyncjob.worker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
