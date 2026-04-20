@@ -1,4 +1,4 @@
-package com.aman.asyncjob.job_query_service;
+package com.aman.asyncjob.query;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

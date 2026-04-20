@@ -1,4 +1,4 @@
-package com.aman.asyncjob.job_query_service;
+package com.aman.asyncjob.query;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
