@@ -21,9 +21,9 @@
 
     <modules>
         <module>common</module>
+        <module>job-query-service</module>
         <module>job-submission-service</module>
         <module>job-worker-service</module>
-        <module>job-query-service</module>
     </modules>
 
     <properties>
