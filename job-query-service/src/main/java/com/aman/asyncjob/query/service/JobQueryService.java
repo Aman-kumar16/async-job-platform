@@ -32,14 +32,14 @@ public class JobQueryService {
         String cachedStatus = redisTemplate.opsForValue().get(redisKey);
 
         if (cachedStatus != null) {
-            log.debug("Cache hit for job {}", jobId);
+            log.info("Cache hit for job {}", jobId);
             // Still fetch full details from DB but flag it as cached
             return jobRepository.findById(jobId)
                     .map(job -> mapToResponse(job, true))
                     .orElseThrow(() -> new EntityNotFoundException("Job not found: " + jobId));
         }
 
-        log.debug("Cache miss for job {} — hitting PostgreSQL", jobId);
+        log.info("Cache miss for job {} — hitting PostgreSQL", jobId);
         return jobRepository.findById(jobId)
                 .map(job -> mapToResponse(job, false))
                 .orElseThrow(() -> new EntityNotFoundException("Job not found: " + jobId));
