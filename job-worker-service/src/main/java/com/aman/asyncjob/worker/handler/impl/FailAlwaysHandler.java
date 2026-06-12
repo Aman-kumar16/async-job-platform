@@ -12,7 +12,7 @@ public class FailAlwaysHandler implements JobHandler {
 
     @Override
     public void handle(JobEvent jobEvent) {
-        log.info("FailAlwaysHandler triggered for job {} — this will always fail", jobEvent.getJobId());
+        log.info("FailAlwaysHandler triggered for job {} — this will always fail", jobEvent.jobId());
         throw new RuntimeException("Intentional failure for testing DLQ");
     }
 

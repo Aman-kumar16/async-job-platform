@@ -35,7 +35,7 @@ public class JobWorkerService {
 
     @Transactional
     public void process(JobEvent jobEvent) {
-        String jobId = jobEvent.getJobId();
+        String jobId = jobEvent.jobId();
 
         // Step 1: Fetch job from DB
         Job job = jobRepository.findById(jobId)

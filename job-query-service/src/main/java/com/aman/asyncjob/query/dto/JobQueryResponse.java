@@ -4,22 +4,21 @@ import com.aman.asyncjob.common.enums.JobPriority;
 import com.aman.asyncjob.common.enums.JobStatus;
 import com.aman.asyncjob.common.enums.JobType;
 import lombok.Builder;
-import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Data
 @Builder
-public class JobQueryResponse {
+public record JobQueryResponse(
 
-    private String jobId;
-    private JobType jobType;
-    private JobStatus jobStatus;
-    private JobPriority jobPriority;
-    private int retryCount;
-    private String errorMessage;
-    private LocalDateTime submittedAt;
-    private LocalDateTime updatedAt;
-    private LocalDateTime completedAt;
-    private boolean cachedResult;
+        String jobId,
+        JobType jobType,
+        JobStatus jobStatus,
+        JobPriority jobPriority,
+        int retryCount,
+        String errorMessage,
+        LocalDateTime submittedAt,
+        LocalDateTime updatedAt,
+        LocalDateTime completedAt,
+        boolean cachedResult
+) {
 }

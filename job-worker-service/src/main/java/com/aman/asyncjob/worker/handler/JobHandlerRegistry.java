@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * At runtime, worker looks up the correct handler by job type
  * Since Spring automatically injects all beans implementing JobHandler.
  * <p>
- * To Add a new job type just create a new handler class.
+ * To Add a new job type we can just create a new handler class.
  */
 @Component
 public class JobHandlerRegistry {

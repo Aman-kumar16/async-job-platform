@@ -21,7 +21,7 @@ public class JobKafkaConsumer {
             concurrency = "3"
     )
     public void consumeHigh(JobEvent jobEvent) {
-        log.info("Consumed HIGH priority job: {}", jobEvent.getJobId());
+        log.info("Consumed HIGH priority job: {}", jobEvent.jobId());
         jobWorkerService.process(jobEvent);
     }
 
@@ -31,7 +31,7 @@ public class JobKafkaConsumer {
             concurrency = "2"
     )
     public void consumeMedium(JobEvent jobEvent) {
-        log.info("Consumed MEDIUM priority job: {}", jobEvent.getJobId());
+        log.info("Consumed MEDIUM priority job: {}", jobEvent.jobId());
         jobWorkerService.process(jobEvent);
     }
 
@@ -41,7 +41,7 @@ public class JobKafkaConsumer {
             concurrency = "1"
     )
     public void consumeLow(JobEvent jobEvent) {
-        log.info("Consumed LOW priority job: {}", jobEvent.getJobId());
+        log.info("Consumed LOW priority job: {}", jobEvent.jobId());
         jobWorkerService.process(jobEvent);
     }
 }

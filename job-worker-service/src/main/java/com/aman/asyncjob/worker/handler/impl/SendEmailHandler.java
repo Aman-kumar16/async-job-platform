@@ -13,14 +13,18 @@ public class SendEmailHandler implements JobHandler {
     @Override
     public void handle(JobEvent jobEvent) {
         // Simulated — in production this would call an email service
-        String to = (String) jobEvent.getPayload().getOrDefault("to", "unknown");
-        String subject = (String) jobEvent.getPayload().getOrDefault("subject", "no subject");
+        String to = (String) jobEvent.payload().getOrDefault("to", "unknown");
+        String subject = (String) jobEvent.payload().getOrDefault("subject", "no subject");
         log.info("Sending email to {} with subject '{}' for job {}",
-                to, subject, jobEvent.getJobId());
+                to, subject, jobEvent.jobId());
         //ToDO: real implementation to handle sending emails to provided email ids.
         // Simulate processing time
-        try { Thread.sleep(500); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
-        log.info("Email sent successfully for job {}", jobEvent.getJobId());
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        log.info("Email sent successfully for job {}", jobEvent.jobId());
     }
 
     @Override
