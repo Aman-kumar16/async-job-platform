@@ -36,9 +36,9 @@ public class JobService {
         String jobId = UUID.randomUUID().toString();
 
         // Step 1: Idempotency check
-        if (StringUtils.hasText(request.getIdempotencyKey())) {
+        if (StringUtils.hasText(request.idempotencyKey())) {
             Optional<String> existingJobId = idempotencyService
-                    .registerOrGetExisting(request.getIdempotencyKey(), jobId);
+                    .registerOrGetExisting(request.idempotencyKey(), jobId);
 
             if (existingJobId.isPresent()) {
                 return buildDuplicateResponse(existingJobId.get());
@@ -48,11 +48,11 @@ public class JobService {
         // Step 2: Persist job to PostgreSQL
         Job job = Job.builder()
                 .id(jobId)
-                .jobType(request.getJobType())
-                .jobPriority(request.getPriority())
+                .jobType(request.jobType())
+                .jobPriority(request.priority())
                 .jobStatus(JobStatus.PENDING)
-                .payload(request.getPayload())
-                .idempotencyKey(request.getIdempotencyKey())
+                .payload(request.payload())
+                .idempotencyKey(request.idempotencyKey())
                 .retryCount(0)
                 .maxRetries(DEFAULT_MAX_RETRIES)
                 .build();
@@ -69,11 +69,11 @@ public class JobService {
         // Step 5: Publish to Kafka
         JobEvent event = JobEvent.builder()
                 .jobId(jobId)
-                .jobType(request.getJobType())
-                .priority(request.getPriority())
-                .payload(request.getPayload())
+                .jobType(request.jobType())
+                .jobPriority(request.priority())
+                .payload(request.payload())
                 .retryCount(0)
-                .idempotencyKey(request.getIdempotencyKey())
+                .idempotencyKey(request.idempotencyKey())
                 .build();
 
         // Wrapping our Kafka call so that it doesn't publish until database has committed to keep it consistent
@@ -91,7 +91,7 @@ public class JobService {
                 .jobType(savedJob.getJobType())
                 .jobPriority(savedJob.getJobPriority())
                 .submittedAt(savedJob.getSubmittedAt())
-                .duplicate(false)
+                .isDuplicate(false)
                 .build();
     }
 
@@ -105,7 +105,7 @@ public class JobService {
                 .jobType(job.getJobType())
                 .jobPriority(job.getJobPriority())
                 .submittedAt(job.getSubmittedAt())
-                .duplicate(false)
+                .isDuplicate(false)
                 .build();
     }
 
@@ -117,7 +117,7 @@ public class JobService {
                         .jobType(job.getJobType())
                         .jobPriority(job.getJobPriority())
                         .submittedAt(job.getSubmittedAt())
-                        .duplicate(true)
+                        .isDuplicate(true)
                         .build())
                 .orElseThrow(() -> new RuntimeException(
                         "Idempotency key points to missing job: " + existingJobId));

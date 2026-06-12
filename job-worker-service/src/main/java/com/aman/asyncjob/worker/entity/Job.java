@@ -4,10 +4,7 @@ import com.aman.asyncjob.common.enums.JobPriority;
 import com.aman.asyncjob.common.enums.JobStatus;
 import com.aman.asyncjob.common.enums.JobType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -18,25 +15,33 @@ import java.util.Map;
 
 @Entity
 @Table(name = "jobs")
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Job {
 
     @Id
+    @ToString.Include
+    @EqualsAndHashCode.Include
     private String id;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "job_type", nullable = false)
+    @ToString.Include
     private JobType jobType;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "job_priority", nullable = false)
+    @ToString.Include
     private JobPriority jobPriority;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "job_status", nullable = false)
+    @ToString.Include
     private JobStatus jobStatus;
 
     @JdbcTypeCode(SqlTypes.JSON)
@@ -44,12 +49,15 @@ public class Job {
     private Map<String, Object> payload;
 
     @Column(name = "idempotency_key", unique = true)
+    @ToString.Include
     private String idempotencyKey;
 
     @Column(name = "retry_count")
+    @ToString.Include
     private int retryCount;
 
     @Column(name = "max_retries")
+    @ToString.Include
     private int maxRetries;
 
     @Column(name = "error_message")
@@ -60,12 +68,15 @@ public class Job {
 
     @CreationTimestamp
     @Column(name = "submitted_at", nullable = false)
+    @ToString.Include
     private LocalDateTime submittedAt;
 
     @UpdateTimestamp
     @Column(name = "updated_at")
+    @ToString.Include
     private LocalDateTime updatedAt;
 
     @Column(name = "completed_at")
+    @ToString.Include
     private LocalDateTime completedAt;
 }

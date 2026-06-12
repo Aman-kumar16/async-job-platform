@@ -16,16 +16,16 @@ public class KafkaProducerService {
     private final KafkaTemplate<String, JobEvent> kafkaTemplate;
 
     public void publishJob(JobEvent jobEvent) {
-        String topic = resolveTopic(jobEvent.getPriority());
+        String topic = resolveTopic(jobEvent.jobPriority());
 
-        kafkaTemplate.send(topic, jobEvent.getJobId(), jobEvent)
+        kafkaTemplate.send(topic, jobEvent.jobId(), jobEvent)
                 .whenComplete((result, exception) -> {
                     if (exception != null) {
                         log.error("Failed to publish job {} to topic {}: {}",
-                                jobEvent.getJobId(), topic, exception.getMessage());
+                                jobEvent.jobId(), topic, exception.getMessage());
                     } else {
                         log.info("Job {} published to topic {} partition {} offset {}",
-                                jobEvent.getJobId(),
+                                jobEvent.jobId(),
                                 topic,
                                 result.getRecordMetadata().partition(),
                                 result.getRecordMetadata().offset());
@@ -35,9 +35,9 @@ public class KafkaProducerService {
 
     private String resolveTopic(JobPriority priority) {
         return switch (priority) {
-            case HIGH   -> KafkaTopics.JOBS_HIGH;
+            case HIGH -> KafkaTopics.JOBS_HIGH;
             case MEDIUM -> KafkaTopics.JOBS_MEDIUM;
-            case LOW    -> KafkaTopics.JOBS_LOW;
+            case LOW -> KafkaTopics.JOBS_LOW;
         };
     }
 }

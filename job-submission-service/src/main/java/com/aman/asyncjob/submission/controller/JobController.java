@@ -24,14 +24,14 @@ public class JobController {
 
     @Operation(
             summary = "Submit a new background job",
-            description = "Validates the request and pushes the job to the processing queue. Returns 202 if accepted, or 200 if it's a duplicate request."
+            description = "Validates the request and pushes the job to the processing queue. Returns 202 if accepted, or 200 if it's a isDuplicate request."
     )
     @ApiResponse(responseCode = "202", description = "Job accepted and queued")
     @ApiResponse(responseCode = "200", description = "Duplicate request detected; returned existing job status")
     @ApiResponse(responseCode = "400", description = "Invalid job submission payload")
     @PostMapping
     public ResponseEntity<JobSubmitResponse> submitJob(@Valid @RequestBody JobSubmitRequest request) {
-        log.info("Received job submission: type={} priority={}", request.getJobType(), request.getPriority());
+        log.info("Received job submission: type={} priority={}", request.jobType(), request.priority());
         JobSubmitResponse response = jobService.submit(request);
         HttpStatus status = response.isDuplicate() ? HttpStatus.OK : HttpStatus.ACCEPTED;
         return ResponseEntity.status(status).body(response);
